@@ -1,17 +1,22 @@
-import { Card, CardBody, Heading, Image, Text } from "@chakra-ui/react"
+import { Card, CardBody, Heading, HStack, Image, Text } from "@chakra-ui/react"
 import PropTypes from 'prop-types';
 import PlatformIconList from "./PlatformIconList";
+import CriticScore from "./CriticScore";
+import getCroppedImageUrl from "../services/image-url";
 
 
 const GameCard = ({game}) => {
   return (
-   <Card key={game.name} borderRadius={10} overflow={'hidden'}>
-        <Image src={game.background_image} />
+   <Card  key={game.name}>
+        <Image src= {getCroppedImageUrl(game.background_image)} />
         <CardBody>
             <Heading fontSize={'2xl'}>
                 {game.name}
             </Heading>
+            <HStack justifyContent={'space-between'}>
             <PlatformIconList platforms={game.parent_platforms} />
+            <CriticScore score={game.metacritic} />
+            </HStack>
         </CardBody>
     </Card>
   )
@@ -21,6 +26,7 @@ GameCard.propTypes = {
     game: PropTypes.shape({
       background_image: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
+      metacritic: PropTypes.number,
       parent_platforms: PropTypes.arrayOf(PropTypes.shape({
         platform: PropTypes.shape({
           id: PropTypes.number.isRequired,
