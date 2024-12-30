@@ -9,7 +9,7 @@ import {
 import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 import PropTypes from "prop-types";
-const GenreList = ({onSelectedGenre}) => {
+const GenreList = ({selectedGenre, onSelectedGenre}) => {
   const { data, isLoading, error } = useGenres();
   if (error) return null;
   if (isLoading) return <Spinner />;
@@ -24,6 +24,7 @@ const GenreList = ({onSelectedGenre}) => {
               src={getCroppedImageUrl(genre.image_background)}
             />
             <Button
+              fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
               onClick={() => onSelectedGenre(genre)}
               fontSize={"large"}
               variant="link"
@@ -39,6 +40,11 @@ const GenreList = ({onSelectedGenre}) => {
 
 GenreList.propTypes = {
   onSelectedGenre: PropTypes.func.isRequired,
+  selectedGenre: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    image_background: PropTypes.string.isRequired,
+  }),
 };
 
 export default GenreList;
