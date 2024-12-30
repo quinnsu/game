@@ -3,8 +3,9 @@ import GameCard from "./GameCard";
 import useGames from "../hooks/useGames";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-const GameGrid = () => {
-  const { data, error, isLoading } = useGames();
+import PropTypes from 'prop-types';
+const GameGrid = ({selectedGenre}) => {
+  const { data, error, isLoading } = useGames(selectedGenre);
   const skeletons = [1, 2, 3, 4, 5, 6];
   return (
     <>
@@ -23,6 +24,14 @@ const GameGrid = () => {
       </SimpleGrid>
     </>
   );
+};
+
+GameGrid.propTypes = {
+  selectedGenre: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    image_background: PropTypes.string.isRequired,
+  }),
 };
 
 export default GameGrid;
