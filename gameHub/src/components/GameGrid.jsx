@@ -4,8 +4,8 @@ import useGames from "../hooks/useGames";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import PropTypes from 'prop-types';
-const GameGrid = ({selectedGenre, selectedPlatform}) => {
-  const { data, error, isLoading } = useGames(selectedGenre, selectedPlatform);
+const GameGrid = ({gameQuery}) => {
+  const { data, error, isLoading } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6];
   return (
     <>
@@ -27,16 +27,18 @@ const GameGrid = ({selectedGenre, selectedPlatform}) => {
 };
 
 GameGrid.propTypes = {
-  selectedGenre: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    image_background: PropTypes.string.isRequired,
-  }),
-  selectedPlatform: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired
-  })
+    gameQuery: PropTypes.shape({
+        genre: PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            image_background: PropTypes.string.isRequired,
+        }),
+        platform: PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            slug: PropTypes.string.isRequired,
+        }),
+    }),
   
 };
 

@@ -7,8 +7,8 @@ import GenreList from "./components/GenreList";
 import PlatformSelector from "./components/PlatformSelector";
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState(null);
-  const [selectedPlatform, setSelectedPlatform] = useState(null);
+  // Query object pattern
+  const [gameQuery, setGameQuery] = useState({ genre: null, platform: null }); 
   return (
     <Grid
       templateAreas={{
@@ -25,13 +25,13 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
-          <GenreList selectedGenre={selectedGenre} onSelectedGenre={(genre) => setSelectedGenre(genre)} />
+          <GenreList selectedGenre={gameQuery.genre} onSelectedGenre={(genre) => setGameQuery({...gameQuery, genre})} />
         </GridItem>
       </Show>
       <GridItem area="main">
-        <PlatformSelector selectedPlatform={selectedPlatform} onSelectedPlatform={(p) => setSelectedPlatform(p)}/>
-
-        <GameGrid selectedGenre={selectedGenre} selectedPlatform = {selectedPlatform}/>
+        <PlatformSelector gameQuery={gameQuery} onSelectedPlatform={(platform) => setGameQuery({...gameQuery, platform})}/>
+        {/* 这里扩展运算符后，属性名和value相等，可以用这种简洁的写法 */} 
+        <GameGrid gameQuery={gameQuery} selectedPlatform = {gameQuery.platform}/>
       </GridItem>
     </Grid>
   );
