@@ -9,7 +9,7 @@ import SortSelector from "./components/SortSelector";
 
 function App() {
   // Query object pattern
-  const [gameQuery, setGameQuery] = useState({ genre: null, platform: null, sortOrder: null });   
+  const [gameQuery, setGameQuery] = useState({ genre: null, platform: null, sortOrder: null, searchText: null });   
   return (
     <Grid
       templateAreas={{
@@ -22,7 +22,7 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar />
+        <NavBar onSearch={(searchText) => setGameQuery({...gameQuery,searchText})} />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>

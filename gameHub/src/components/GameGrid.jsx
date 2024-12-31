@@ -41,7 +41,8 @@ GameGrid.propTypes = {
         sortOrder: PropTypes.shape({
             value: PropTypes.string.isRequired,
             label: PropTypes.string.isRequired
-        })
+        }),
+        search: PropTypes.string.isRequired,
     }),
   
 };

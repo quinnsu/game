@@ -7,7 +7,8 @@ const ColorModeSwitch = () => {
   return (
     <HStack>
         <Switch colorScheme='green' isChecked={colorMode === 'dark'} onChange={toggleColorMode} />
-        <Text>Dark Mode</Text>
+        {/* whitespace: css原生属性 控制元素内的文本换行和空白处理方式> */}
+        <Text whiteSpace={'nowrap'}>Dark Mode</Text>
     </HStack>
   )
 }
