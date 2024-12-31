@@ -3,7 +3,7 @@ import GameCard from "./GameCard";
 import useGames from "../hooks/useGames";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import PropTypes from 'prop-types';
+import { gameQueryPropTypes } from "../propTypes";
 const GameGrid = ({gameQuery}) => {
   const { data, error, isLoading } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6];
@@ -27,23 +27,7 @@ const GameGrid = ({gameQuery}) => {
 };
 
 GameGrid.propTypes = {
-    gameQuery: PropTypes.shape({
-        genre: PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-            image_background: PropTypes.string.isRequired,
-        }),
-        platform: PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-            slug: PropTypes.string.isRequired,
-        }),
-        sortOrder: PropTypes.shape({
-            value: PropTypes.string.isRequired,
-            label: PropTypes.string.isRequired
-        }),
-        search: PropTypes.string.isRequired,
-    }),
+    gameQuery: gameQueryPropTypes
   
 };
 

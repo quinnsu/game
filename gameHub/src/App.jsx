@@ -6,10 +6,16 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
+import GameHeading from "./components/GameHeading";
 
 function App() {
   // Query object pattern
-  const [gameQuery, setGameQuery] = useState({ genre: null, platform: null, sortOrder: null, searchText: null });   
+  const [gameQuery, setGameQuery] = useState({
+    genre: null,
+    platform: null,
+    sortOrder: null,
+    searchText: null,
+  });
   return (
     <Grid
       templateAreas={{
@@ -22,19 +28,39 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar onSearch={(searchText) => setGameQuery({...gameQuery,searchText})} />
+        <NavBar
+          onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
+        />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
-          <GenreList selectedGenre={gameQuery.genre} onSelectedGenre={(genre) => setGameQuery({...gameQuery, genre})} />
+          <GenreList
+            selectedGenre={gameQuery.genre}
+            onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+          />
         </GridItem>
       </Show>
       <GridItem area="main">
-        <HStack spacing={5} paddingLeft={2} marginBottom={5}>
-          <PlatformSelector selectedPlatform={gameQuery.platform} onSelectedPlatform={(platform) => setGameQuery({...gameQuery, platform})}/>
-          {/* 这里扩展运算符后，属性名和value相等，可以用这种简洁的写法 */}
-          <SortSelector selectedSort={gameQuery.sortOrder} onSelectedSort={(sortOrder) => setGameQuery({...gameQuery,sortOrder})} />
-        </HStack>
+        <Box paddingLeft={2}>
+          <HStack>
+            <GameHeading gameQuery={gameQuery} />
+          </HStack>
+          <HStack spacing={5} marginBottom={5}>
+            <PlatformSelector
+              selectedPlatform={gameQuery.platform}
+              onSelectedPlatform={(platform) =>
+                setGameQuery({ ...gameQuery, platform })
+              }
+            />
+            {/* 这里扩展运算符后，属性名和value相等，可以用这种简洁的写法 */}
+            <SortSelector
+              selectedSort={gameQuery.sortOrder}
+              onSelectedSort={(sortOrder) =>
+                setGameQuery({ ...gameQuery, sortOrder })
+              }
+            />
+          </HStack>
+        </Box>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
