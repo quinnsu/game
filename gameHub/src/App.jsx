@@ -1,14 +1,15 @@
 import "./App.css";
 import { useState } from "react";
-import { Grid, GridItem, Show, Box } from "@chakra-ui/react";
+import { Grid, GridItem, Show, Box, HStack } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import PlatformSelector from "./components/PlatformSelector";
+import SortSelector from "./components/SortSelector";
 
 function App() {
   // Query object pattern
-  const [gameQuery, setGameQuery] = useState({ genre: null, platform: null }); 
+  const [gameQuery, setGameQuery] = useState({ genre: null, platform: null, sortOrder: null });   
   return (
     <Grid
       templateAreas={{
@@ -29,9 +30,12 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <PlatformSelector gameQuery={gameQuery} onSelectedPlatform={(platform) => setGameQuery({...gameQuery, platform})}/>
-        {/* 这里扩展运算符后，属性名和value相等，可以用这种简洁的写法 */} 
-        <GameGrid gameQuery={gameQuery} selectedPlatform = {gameQuery.platform}/>
+        <HStack spacing={5} paddingLeft={2} marginBottom={5}>
+          <PlatformSelector selectedPlatform={gameQuery.platform} onSelectedPlatform={(platform) => setGameQuery({...gameQuery, platform})}/>
+          {/* 这里扩展运算符后，属性名和value相等，可以用这种简洁的写法 */}
+          <SortSelector selectedSort={gameQuery.sortOrder} onSelectedSort={(sortOrder) => setGameQuery({...gameQuery,sortOrder})} />
+        </HStack>
+        <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
   );

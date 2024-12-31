@@ -38,6 +38,10 @@ GameGrid.propTypes = {
             name: PropTypes.string.isRequired,
             slug: PropTypes.string.isRequired,
         }),
+        sortOrder: PropTypes.shape({
+            value: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired
+        })
     }),
   
 };
