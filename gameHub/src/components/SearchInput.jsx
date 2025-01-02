@@ -1,18 +1,20 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
-import ProtoTypes from "prop-types";
+import useGameQueryStore from "../store";
 
-const SearchInput = ({ onSearch }) => {
+const SearchInput = () => {
   // useRef: form只有一个input元素 ref就可以处理
   const ref = useRef(null);
+
+  const setSearchText = useGameQueryStore(s => s.setSearchText)
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
         if (ref.current) {
          console.log(ref.current.value);
-         onSearch(ref.current.value);
+         setSearchText(ref.current.value);
         }
       }}
     >
@@ -30,10 +32,6 @@ const SearchInput = ({ onSearch }) => {
       </InputGroup>
     </form>
   );
-};
-
-SearchInput.propTypes = {
-  onSearch: ProtoTypes.func.isRequired,
 };
 
 export default SearchInput;

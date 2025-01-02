@@ -1,9 +1,11 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import APIClient from "../services/api-client";
+import useGameQueryStore from "../store";
 
 const apiClient = new APIClient("/games");
-const useGames = (gameQuery) =>
-  useInfiniteQuery({
+const useGames = () =>{
+  const gameQuery = useGameQueryStore((s) => s.gameQuery);
+ return  useInfiniteQuery({
     queryKey: ["games", gameQuery],
     queryFn: ({ pageParam=1}) =>
       apiClient.getAll({
@@ -20,6 +22,7 @@ const useGames = (gameQuery) =>
       // RAWG API返回的数据中有next字段，若有下一页则返回页数，否则返回undefined
     },
     staleTime: 24 * 60 * 60 * 1000, // 24 hours
-  });
+  });}
+  
 
 export default useGames;

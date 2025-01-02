@@ -1,5 +1,4 @@
 import "./App.css";
-import { useState } from "react";
 import { Grid, GridItem, Show, Box, HStack } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
@@ -9,13 +8,6 @@ import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
 
 function App() {
-  // Query object pattern
-  const [gameQuery, setGameQuery] = useState({
-    genreId: null,
-    platformId: null,
-    sortOrder: null,
-    searchText: null,
-  });
   return (
     <Grid
       templateAreas={{
@@ -28,40 +20,24 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar
-          onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
-        />
+        <NavBar />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
-          <GenreList
-            selectedGenre={gameQuery.genreId}
-            onSelectedGenre={(genreId) => setGameQuery({ ...gameQuery, genreId })}
-          />
+          <GenreList />
         </GridItem>
       </Show>
       <GridItem area="main">
         <Box paddingLeft={2}>
           <HStack>
-            <GameHeading gameQuery={gameQuery} />
+            <GameHeading />
           </HStack>
           <HStack spacing={5} marginBottom={5}>
-            <PlatformSelector
-              selectedPlatform={gameQuery.platformId}
-              onSelectedPlatform={(platformId) =>
-                setGameQuery({ ...gameQuery, platformId })
-              }
-            />
-            {/* 这里扩展运算符后，属性名和value相等，可以用这种简洁的写法 */}
-            <SortSelector
-              selectedSort={gameQuery.sortOrder}
-              onSelectedSort={(sortOrder) =>
-                setGameQuery({ ...gameQuery, sortOrder })
-              }
-            />
+            <PlatformSelector />
+            <SortSelector />
           </HStack>
         </Box>
-        <GameGrid gameQuery={gameQuery} />
+        <GameGrid />
       </GridItem>
     </Grid>
   );

@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode='theme.config.initialColorMode' /> 
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} /> 
       <QueryClientProvider client={queryClient}>
       <App />
       <ReactQueryDevtools />

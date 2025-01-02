@@ -4,6 +4,8 @@ const useGameQueryStore = create((set) => ({
     gameQuery: {},
     setSearchText: (searchText) =>
       set(() => ({ gameQuery: { searchText } })),
+    
+    // 选择了genreId，就要清空search
     setGenreId: (genreId) =>
       set((store) => ({
         gameQuery: { ...store.gameQuery, genreId, searchText: undefined },
