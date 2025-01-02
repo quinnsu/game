@@ -11,8 +11,8 @@ import GameHeading from "./components/GameHeading";
 function App() {
   // Query object pattern
   const [gameQuery, setGameQuery] = useState({
-    genre: null,
-    platform: null,
+    genreId: null,
+    platformId: null,
     sortOrder: null,
     searchText: null,
   });
@@ -35,8 +35,8 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <GenreList
-            selectedGenre={gameQuery.genre}
-            onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+            selectedGenre={gameQuery.genreId}
+            onSelectedGenre={(genreId) => setGameQuery({ ...gameQuery, genreId })}
           />
         </GridItem>
       </Show>
@@ -47,9 +47,9 @@ function App() {
           </HStack>
           <HStack spacing={5} marginBottom={5}>
             <PlatformSelector
-              selectedPlatform={gameQuery.platform}
-              onSelectedPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platform })
+              selectedPlatform={gameQuery.platformId}
+              onSelectedPlatform={(platformId) =>
+                setGameQuery({ ...gameQuery, platformId })
               }
             />
             {/* 这里扩展运算符后，属性名和value相等，可以用这种简洁的写法 */}

@@ -34,7 +34,7 @@ const GenreList = ({ selectedGenre, onSelectedGenre }) => {
                 whiteSpace={"normal"}
                 textAlign={"left"}
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-                onClick={() => onSelectedGenre(genre)}
+                onClick={() => onSelectedGenre(genre.id)}
                 fontSize={"large"}
                 variant="link"
               >
@@ -50,11 +50,7 @@ const GenreList = ({ selectedGenre, onSelectedGenre }) => {
 
 GenreList.propTypes = {
   onSelectedGenre: PropTypes.func.isRequired,
-  selectedGenre: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    image_background: PropTypes.string.isRequired,
-  }),
+  selectedGenre: PropTypes.number.isRequired,
 };
 
 export default GenreList;

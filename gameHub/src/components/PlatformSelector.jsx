@@ -13,7 +13,7 @@ function PlatformSelector({ onSelectedPlatform, selectedPlatform }) {
       </MenuButton>
       <MenuList>
         {data?.results.map((platform) => (
-          <MenuItem key={platform.id} onClick={() => onSelectedPlatform(platform) }>{platform.name}</MenuItem>
+          <MenuItem key={platform.id} onClick={() => onSelectedPlatform(platform.id) }>{platform.name}</MenuItem>
         ))}
       </MenuList>
     </Menu>
@@ -22,11 +22,7 @@ function PlatformSelector({ onSelectedPlatform, selectedPlatform }) {
 
 PlatformSelector.propTypes = {
   onSelectedPlatform: PropTypes.func.isRequired,
-  selectedPlatform: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-  }),
+  selectedPlatform: PropTypes.number.isRequired,
 };
 
 export default PlatformSelector;
