@@ -1,8 +1,10 @@
 
 import { useParams } from "react-router-dom";
 import useGame from "../hooks/useGame";
-import { Heading, Spinner, Text } from "@chakra-ui/react";
+import { Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import ExpendableText from "../components/ExpendableText";
+import DefinitionItem from "../components/DefinitionItem";
+import CriticScore from "../components/CriticScore";
 const GameDetailPage = () => {
   const {slug} = useParams();
   const {data, isLoading, error} = useGame(slug);
@@ -17,6 +19,26 @@ const GameDetailPage = () => {
       <ExpendableText> 
         {description}
       </ExpendableText>
+      <SimpleGrid columns={2}>
+      <DefinitionItem term="Platforms">
+        {data.parent_platforms?.map(({ platform }) => (
+          <Text key={platform.id}>{platform.name}</Text>
+        ))}
+      </DefinitionItem>
+      <DefinitionItem term="Metascore">
+        <CriticScore score={data.metacritic} />
+      </DefinitionItem>
+      <DefinitionItem term="Genres">
+        {data.genres.map((genre) => (
+          <Text key={genre.id}>{genre.name}</Text>
+        ))}
+      </DefinitionItem>
+      <DefinitionItem term="Publishers">
+        {data.publishers?.map((publisher) => (
+          <Text key={publisher.id}>{publisher.name}</Text>
+        ))}
+      </DefinitionItem>
+      </SimpleGrid>
     </>
   )
 }
