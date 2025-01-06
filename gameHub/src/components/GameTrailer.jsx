@@ -1,4 +1,4 @@
-import useTrailers from "../hooks/useTrailers.JS";
+import useTrailers from "../hooks/useTrailers.js";
 import propTypes from "prop-types";
 
 const GameTrailer = ({ gameId }) => {

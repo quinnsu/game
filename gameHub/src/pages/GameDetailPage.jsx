@@ -5,6 +5,7 @@ import ExpendableText from "../components/ExpendableText";
 import DefinitionItem from "../components/DefinitionItem";
 import CriticScore from "../components/CriticScore";
 import GameTrailer from "../components/GameTrailer";
+import GameScreenshots from "../components/GameScreenshots";
 const GameDetailPage = () => {
   const { slug } = useParams();
   const { data, isLoading, error } = useGame(slug);
@@ -39,6 +40,7 @@ const GameDetailPage = () => {
       </SimpleGrid>
 
         <GameTrailer gameId={data.id} />
+        <GameScreenshots gameId={data.id} />
 
     </>
   );
